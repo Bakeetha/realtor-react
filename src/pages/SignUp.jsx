@@ -41,7 +41,19 @@ export default function SignUp() {
       toast.success("Sign up was successful");
       navigate("/");
     } catch (error) {
-      toast.error("Something went wrong with the registration");
+      console.log('error: ',error);
+      if(error.code === 'auth/email-already-in-use'){
+        toast.error("This email is already in use");
+      } else if(error.code === 'auth/missing-email'){
+        toast.error("Please enter an email");
+      } else if(error.code === 'auth/invalid-email'){
+        toast.error("Invalid email");
+      } else if(error.code === 'auth/weak-password'){
+        toast.error("Weak password");
+      } else {
+        toast.error("Something went wrong with the registration");
+      }
+      // toast.error("Something went wrong with the registration");
     }
   }
   return (
