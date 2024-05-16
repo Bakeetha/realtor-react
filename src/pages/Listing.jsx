@@ -14,8 +14,8 @@ import Spinner from '../components/Spinner';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 // import Swiper core and required modules
-
 import { Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
@@ -194,8 +194,20 @@ export default function Listing() {
             )
               }
           </div>
-          <div className='bg-blue-300 w-full h-[200px] lg-[400px] z-10 overflow-x-hidden'>
-            
+          <div className='w-full h-[200px] md:h-[400px] z-10 overflow-x-hidden mt-6 md:mt-0 md:ml-2'>
+          <MapContainer center={[listing.geolocation.lat, listing.geolocation.lng]} 
+          zoom={13} scrollWheelZoom={false}
+          style={{width: '100%', height: '100%'}}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[listing.geolocation.lat, listing.geolocation.lng]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
           </div>
         </div>
     </main>
